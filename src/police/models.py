@@ -36,7 +36,7 @@ designation_choice = (
 class Police(User):
     police_id = models.CharField(max_length=20)
     designation = models.CharField(max_length=10, choices=designation_choice, null=True)
-    ward = models.ForeignKey('Ward', null=True)
+    ward = models.ForeignKey('Ward', null=True,on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
 
     class Meta:
@@ -77,7 +77,7 @@ class Ward(models.Model):
 
 
 class Contact(models.Model):
-    ward = models.ForeignKey('ward')
+    ward = models.ForeignKey('ward',on_delete=models.CASCADE)
     contact = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
@@ -93,7 +93,7 @@ class Criminal(models.Model):
     father_name = models.CharField(max_length=255)
     age = models.IntegerField()
     caste = models.CharField(max_length=255)
-    ward=models.ForeignKey(Ward,null=True)
+    ward=models.ForeignKey(Ward,null=True,on_delete=models.CASCADE)
     birth_mark_desc=models.TextField()
     height=models.CharField(max_length=255)
     complexion=models.CharField(max_length=255)

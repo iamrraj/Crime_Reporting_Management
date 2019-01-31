@@ -51,7 +51,7 @@ def get_case_categories(request):
 
 
 def dashboard(request):
-    if not request.user.is_authenticated() or not str(request.user.__class__.__name__)=="Police":
+    if not request.user.is_authenticated or not str(request.user.__class__.__name__)=="Police":
         raise Http404
 
 
@@ -130,7 +130,7 @@ def dashboard(request):
 
 
 def cbcview(request,id=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
     my_object = get_object_or_404(CaseCategory, pk=id)
     cases_qset=Case.objects.filter(case_categories=my_object )
@@ -141,7 +141,7 @@ def cbcview(request,id=None):
 
 
 def cybercbcview(request,id=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
     my_cyber_object = get_object_or_404(CyberCaseCategories, pk=id)
     cyber_cases_qset=Case.objects.filter(cyber_case_categories=my_cyber_object )
@@ -201,7 +201,7 @@ def is_docu(value):
 
 
 def case_detail(request,id=None,approved=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
     app=approved
     comments = Comment.objects.filter(case = id)
@@ -248,7 +248,7 @@ def case_detail(request,id=None,approved=None):
     return render(request,'police/case_detail.html',context)
 
 def atip_detail(request,id=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
     my_object = get_object_or_404(AnonymousTip, id=id)
     
@@ -269,7 +269,7 @@ def b(b_id):
 
 
 def person_detail_view(request,id=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
 
     # user = get_object_or_404(Citizen,id=id)
@@ -336,7 +336,7 @@ def create_criminal_details(request):
 
 
 def atips(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
     aqset = AnonymousTip.objects.all()
     context={"aqset":aqset}

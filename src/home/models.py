@@ -23,7 +23,7 @@ class AnonymousUser(User):
 class AnonymousTip(models.Model):
     title = models.CharField(max_length=80, blank=False)
     description = models.TextField()
-    userid = models.ForeignKey(AnonymousUser,null=True,blank=True)
+    userid = models.ForeignKey(AnonymousUser,null=True,blank=True,on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     incident_time = models.DateField()
     updated = models.DateTimeField(auto_now=True)
@@ -43,7 +43,7 @@ class Evidence(models.Model):
         image2 =  models.ImageField(upload_to=evidence_upload_location, blank = True)
         doc =  models.FileField(upload_to=evidence_upload_location, blank = True)
         video =  models.FileField(upload_to=evidence_upload_location, blank = True)
-        anonymous_tip = models.ForeignKey(AnonymousTip,null=True,blank=True)
+        anonymous_tip = models.ForeignKey(AnonymousTip,null=True,blank=True,on_delete=models.CASCADE)
 
         def __str__(self):
             return str(self.id)

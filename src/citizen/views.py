@@ -25,7 +25,7 @@ def login_view(request):
     return render(request, "citizen/login.html",{'form':form})
 
 def dashboard(request):
-    if not request.user.is_authenticated() :
+    if not request.user.is_authenticated :
         return redirect("/citizen")
     
     total=Case.objects.filter(userid=request.user).count()
@@ -44,7 +44,7 @@ def citizen_logout(request):
     return redirect("/")
 
 def create_case(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/citizen")
     form = case_form(request.POST or None)
     if form.is_valid():
@@ -61,7 +61,7 @@ def create_case(request):
 
 
 def cbcview(request,sel=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/citizen")
     my_object = get_object_or_404(Citizen, pk=request.user.id)
     
@@ -86,7 +86,7 @@ def cbcview(request,sel=None):
 from comment.models import Comment
 
 def user_case_detail(request,id=None):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/citizen")
     comments = Comment.objects.filter(case = id)
     my_object = get_object_or_404(Case, id=id)
@@ -132,7 +132,7 @@ def user_case_detail(request,id=None):
 
 
 def create_cyber_case(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/citizen")
     form=cyber_case_form(request.POST or None)
     if form.is_valid():
